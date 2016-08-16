@@ -1,0 +1,10 @@
+GoogleMobileAd_VNTIS
+
+Version 1.2 (16 August 2016):
+- iOS banner ad id fixed
+
+Version 1.1 (25 July 2016):
+- Banner auto disappear bug fixed
+
+Version 1.0 (9 July 2016):
+- First release
