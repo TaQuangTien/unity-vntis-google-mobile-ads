@@ -64,4 +64,6 @@ Interstitial type:
 
 6. Build and Run on device => Done
 
+[**Download**](https://github.com/TaQuangTien/unity-vntis-google-mobile-ads/current-build)
+
 [Demo clip](https://www.youtube.com/watch?v=SwYnePRv7uk)
