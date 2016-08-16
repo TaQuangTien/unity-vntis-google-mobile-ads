@@ -17,7 +17,9 @@ Unity VNTIS Google Mobile Ads (AKA: AdmobVNTIS)
 * iOS support
 
 **RELEASE NOTES:**
+
 Version 1.2 (16 August 2016):
+
 * iOS banner ad id fixed
 
 Version 1.1 (25 July 2016):
