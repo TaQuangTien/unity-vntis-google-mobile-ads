@@ -1,19 +1,4 @@
-﻿// <copyright file="AdmobVNTIS_Interstitial.cs" company="Ta Quang Tien">
-// Copyright (C) 2016 Ta Quang Tien.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//  http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//    limitations under the License.
-// </copyright>
-
+#pragma warning disable
 using UnityEngine;
 using System.Collections;
 
@@ -21,6 +6,7 @@ public class AdmobVNTIS_Interstitial : MonoBehaviour
 {
 
 	public string InterstitialAdUnitID = "YOUR_AD_UNIT_ID";
+	public string InterstitialAdUnitID_IOS = "YOUR_AD_UNIT_ID";
 	public string[] TestDeviceIds;
 	public bool ShowInterstitialOnLoad = false;
 
@@ -29,6 +15,9 @@ public class AdmobVNTIS_Interstitial : MonoBehaviour
 
 	void Awake ()
 	{
+		#if UNITY_IPHONE
+		InterstitialAdUnitID = InterstitialAdUnitID_IOS;
+		#endif
 		if (instance == null) {
 			DontDestroyOnLoad (this.gameObject);
 			instance = this;
@@ -49,10 +38,7 @@ public class AdmobVNTIS_Interstitial : MonoBehaviour
 
 	public void loadInterstitialAd ()
 	{
-		if (VNTIS_GMA_Connector.interstitial != null)
-			VNTIS_GMA_Connector.loadInterstitialAd ();
-		else
-			Debug.LogError ("Show - Im");
+		VNTIS_GMA_Connector.RequestInterstitial(InterstitialAdUnitID, TestDeviceIds, false);
 	}
 
 	/// <summary>
@@ -60,10 +46,7 @@ public class AdmobVNTIS_Interstitial : MonoBehaviour
 	/// </summary>
 	public void showInterstitial ()
 	{
-		if (VNTIS_GMA_Connector.interstitial != null)
-			VNTIS_GMA_Connector.showInterstitial ();
-		else
-			Debug.LogError ("Show - Null");
+		VNTIS_GMA_Connector.RequestInterstitial(InterstitialAdUnitID, TestDeviceIds, true);
 	}
 
 	/// <summary>
@@ -71,10 +54,12 @@ public class AdmobVNTIS_Interstitial : MonoBehaviour
 	/// </summary>
 	public void showInterstitialImmediately ()
 	{
-		if (VNTIS_GMA_Connector.interstitial != null)
-			VNTIS_GMA_Connector.showInterstitial_Im ();
-		else
-			Debug.LogError ("Show - Im");
+		if(VNTIS_GMA_Connector.interstitial != null &&
+			VNTIS_GMA_Connector.interstitial.IsLoaded()){
+			VNTIS_GMA_Connector.interstitial.Show();
+		}else{
+			loadInterstitialAd ();
+		}
 	}
 
 	public static void _loadInterstitialAd ()
