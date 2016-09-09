@@ -1,4 +1,4 @@
-﻿// <copyright file="VNTIS_GMA_Connector.cs" company="Ta Quang Tien">
+// <copyright file="VNTIS_GMA_Connector.cs" company="Ta Quang Tien">
 // Copyright (C) 2016 Ta Quang Tien.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -56,11 +56,11 @@ public class VNTIS_GMA_Connector {
 	}
 
 	public static void showBanner(){
-			bannerView.Show();
+		bannerView.Show();
 	}
 
 	public static void hideBanner(){
-			bannerView.Hide();
+		bannerView.Hide();
 	}
 
 	static bool interstitialShowOnLoad = false;
@@ -78,7 +78,7 @@ public class VNTIS_GMA_Connector {
 		#else
 		string adUnitId = "unexpected_platform";
 		#endif
-		
+
 		if (interstitial != null && interstitial.IsLoaded()){
 			interstitial.Show();
 			return;
@@ -93,11 +93,11 @@ public class VNTIS_GMA_Connector {
 
 		// Create interstitial ad request.
 		AdRequest.Builder adBuilder = new AdRequest.Builder();
-		
+
 		for (int i = 0; i < TestDeviceIDs.Length; i++){
 			adBuilder.AddTestDevice(TestDeviceIDs[i]);
 		}
-		
+
 		i_request = adBuilder.Build();
 
 		// Load the interstitial with the request.
@@ -111,39 +111,14 @@ public class VNTIS_GMA_Connector {
 			interstitialShowOnLoad = false;
 		}
 	}
-	
+
 	public static void HandleOnAdClosed(object sender, EventArgs args){
 		interstitial.Destroy();
+		interstitial = null;
 	}
-	
+
 	public static void HandleOnAdFailedToLoad(object sender, AdFailedToLoadEventArgs args){
 		interstitial.Destroy();
-	}
-	
-	public static void loadInterstitialAd(){
-		if (interstitial.IsLoaded()){
-			return;
-		}else{
-			interstitialShowOnLoad = false;
-			interstitial.LoadAd(i_request);
-		}
-	}
-
-	public static void showInterstitial(){
-		if (interstitial.IsLoaded()){
-			interstitial.Show();
-		}else{
-			interstitialShowOnLoad = true;
-			interstitial.LoadAd(i_request);
-		}
-	}
-
-	public static void showInterstitial_Im(){
-		if (interstitial.IsLoaded()){
-			interstitial.Show();
-		}else{
-			interstitialShowOnLoad = false;
-			interstitial.LoadAd(i_request);
-		}
+		interstitial = null;
 	}
 }
