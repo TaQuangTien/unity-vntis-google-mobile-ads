@@ -78,12 +78,18 @@ public class VNTIS_GMA_Connector {
 		#else
 		string adUnitId = "unexpected_platform";
 		#endif
-
+		
+		if (interstitial != null && interstitial.IsLoaded()){
+			interstitial.Show();
+			return;
+		}
 		//Initialize an InterstitialAd.
 		interstitial = new InterstitialAd(adUnitId);
 
 		//Register call back
 		interstitial.OnAdLoaded += OnInterstitialLoaded;
+		interstitial.OnAdClosed += HandleOnAdClosed;
+		interstitial.OnAdFailedToLoad += HandleOnAdFailedToLoad;
 
 		// Create interstitial ad request.
 		AdRequest.Builder adBuilder = new AdRequest.Builder();
@@ -105,7 +111,15 @@ public class VNTIS_GMA_Connector {
 			interstitialShowOnLoad = false;
 		}
 	}
-
+	
+	public static void HandleOnAdClosed(object sender, EventArgs args){
+		interstitial.Destroy();
+	}
+	
+	public static void HandleOnAdFailedToLoad(object sender, AdFailedToLoadEventArgs args){
+		interstitial.Destroy();
+	}
+	
 	public static void loadInterstitialAd(){
 		if (interstitial.IsLoaded()){
 			return;
