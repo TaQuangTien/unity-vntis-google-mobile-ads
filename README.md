@@ -1,10 +1,8 @@
 Unity VNTIS Google Mobile Ads (AKA: AdmobVNTIS)
 ===============================================
 
-
-
-    Unity VNTIS Google Mobile Ads Plug-in by VNTIS is the easiest choice for you. 
-    Just drag & drop, put your AdUnitId and start earning money.
+This is a Google Mobile Ads Wrapper for Unity which is the easiest choice for you. 
+Just drag & drop, put your AdUnitId and start earning money.
 
 **FEATURES:**
 * the easiest plugin to use
